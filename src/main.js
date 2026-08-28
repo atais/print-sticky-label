@@ -1,4 +1,6 @@
 import {PDFDocument} from 'pdf-lib'
+import {icon} from '@fortawesome/fontawesome-svg-core'
+import {faGithub} from '@fortawesome/free-brands-svg-icons/faGithub'
 import './style.css'
 
 const $ = (selector) => document.querySelector(selector)
@@ -6,6 +8,9 @@ const fileInput = $('#fileInput'), dropzone = $('#dropzone'), filename = $('#fil
 const makeBtn = $('#makeBtn'), downloadBtn = $('#downloadBtn')
 const preview = $('#preview'), previewFrame = $('#previewFrame')
 let selectedFile, selectedPosition = 1, outputUrl, outputName
+
+$('#buildVersion').textContent = import.meta.env.VITE_BUILD_VERSION || 'local'
+$('#githubIcon').innerHTML = icon(faGithub).html.join('')
 
 function setFile(file) {
     if (!file) return

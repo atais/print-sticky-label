@@ -1,0 +1,42 @@
+name: Zgłoś uwagę
+description: Zgłoś problem lub sugestię dotyczącą aplikacji.
+title: "[Uwaga]: "
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Co się stało?
+      description: Opisz problem lub sugestię.
+      placeholder: Krótki opis…
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Kroki do odtworzenia problemu
+      description: Jak możemy zobaczyć ten sam problem?
+      placeholder: |
+        1. Otwórz…
+        2. Kliknij…
+        3. Zobacz…
+  - type: textarea
+    id: expected
+    attributes:
+      label: Oczekiwany rezultat
+      description: Co powinno się wydarzyć?
+  - type: input
+    id: version
+    attributes:
+      label: Wersja aplikacji
+      description: Wpisz numer wersji widoczny w stopce.
+      placeholder: np. v1.0.0
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Przeglądarka
+      options:
+        - Chrome
+        - Firefox
+        - Safari
+        - Edge
+        - Inna
