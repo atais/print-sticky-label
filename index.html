@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Ustaw etykietę PDF w wybranym polu arkusza A4."/>
+    <title>Pozycjoner etykiet A4</title>
+</head>
+<body>
+<main class="app">
+    <section class="card upload-card">
+        <div class="step-heading"><span class="step-number">1</span>
+            <div><span class="step-label">Krok pierwszy</span>
+                <h1>Wczytaj etykietę PDF</h1></div>
+        </div>
+        <p>Wczytaj PDF z etykietą umieszczoną w lewym górnym polu A4. Plik jest przetwarzany lokalnie w
+            przeglądarce.</p>
+        <input id="fileInput" type="file" accept="application/pdf,.pdf" hidden/>
+        <div id="dropzone" class="dropzone" tabindex="0" role="button" aria-label="Wybierz plik PDF">
+            <strong>Przeciągnij PDF tutaj</strong>
+            albo kliknij, żeby wybrać plik
+        </div>
+        <div id="filename" class="filename" aria-live="polite"></div>
+    </section>
+
+    <section class="card position-card" aria-labelledby="position-title">
+        <div class="step-heading"><span class="step-number">2</span>
+            <div><span class="step-label">Krok drugi</span>
+                <h2 id="position-title">Wybierz wolne pole</h2></div>
+        </div>
+        <p>Wybierasz pole odpowiadające niewykorzystanej części arkusza samoprzylepnego.</p>
+        <div class="center">
+            <button class="paper" type="button" aria-label="Wybierz pozycję etykiety na arkuszu A4">
+                <span class="quad q1 selected" data-pos="1">1</span>
+                <span class="quad q2" data-pos="2">2</span>
+                <span class="quad q3" data-pos="3">3</span>
+                <span class="quad q4" data-pos="4">4</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="card action-card">
+        <div class="step-heading"><span class="step-number">3</span>
+            <div><span class="step-label">Krok trzeci</span>
+                <h2>Utwórz i pobierz</h2></div>
+        </div>
+        <p>Utwórz PDF, sprawdź podgląd i pobierz plik, gdy wszystko się zgadza.</p>
+        <div class="actions">
+            <button id="makeBtn" class="primary" disabled>Utwórz PDF</button>
+            <button id="downloadBtn" class="secondary" disabled>Pobierz PDF</button>
+        </div>
+        <div id="preview" class="preview" aria-labelledby="preview-title">
+            <h3 id="preview-title">Podgląd PDF</h3>
+            <iframe id="previewFrame" title="Podgląd wygenerowanego PDF"></iframe>
+        </div>
+    </section>
+</main>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
