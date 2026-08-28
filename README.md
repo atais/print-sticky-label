@@ -39,3 +39,7 @@ and publishes the static `dist/` output to the `gh-pages` branch. You can also r
 from the Actions tab.
 
 The footer displays the published release tag as the build version. Local builds display `local`.
+
+## PDF regression fixtures
+
+Use [`tests/fixtures/pdf-positioning`](tests/fixtures/pdf-positioning) to store a source label and its four manually validated A4 outputs. See that folder's README for the required file names. These fixtures will be used for an automated visual-regression test.

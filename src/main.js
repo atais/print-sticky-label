@@ -1,6 +1,6 @@
-import {PDFDocument} from 'pdf-lib'
 import {icon} from '@fortawesome/fontawesome-svg-core'
 import {faGithub} from '@fortawesome/free-brands-svg-icons/faGithub'
+import {createPositionedPdf} from './pdf.js'
 import './style.css'
 
 const $ = (selector) => document.querySelector(selector)
@@ -52,28 +52,12 @@ function downloadBlob(blob, name) {
     setTimeout(() => URL.revokeObjectURL(url), 2_000)
 }
 
-async function createPositionedPdf(file, position) {
-    const source = await PDFDocument.load(await file.arrayBuffer())
-    if (!source.getPageCount()) throw new Error('PDF nie ma żadnej strony.')
-    const sourcePage = source.getPage(0), width = sourcePage.getWidth(), height = sourcePage.getHeight()
-    const document = await PDFDocument.create(), page = document.addPage([width, height])
-    const label = await document.embedPage(sourcePage, {left: 0, bottom: height / 2, right: width / 2, top: height})
-    const targets = {
-        1: {x: 0, y: height / 2},
-        2: {x: width / 2, y: height / 2},
-        3: {x: 0, y: 0},
-        4: {x: width / 2, y: 0}
-    }
-    page.drawPage(label, {...targets[position], width: width / 2, height: height / 2})
-    return document.save()
-}
-
 makeBtn.addEventListener('click', async () => {
     if (!selectedFile) return;
     makeBtn.disabled = true;
     downloadBtn.disabled = true;
     try {
-        const blob = new Blob([await createPositionedPdf(selectedFile, selectedPosition)], {type: 'application/pdf'});
+        const blob = new Blob([await createPositionedPdf(await selectedFile.arrayBuffer(), selectedPosition)], {type: 'application/pdf'});
         if (outputUrl) URL.revokeObjectURL(outputUrl);
         outputUrl = URL.createObjectURL(blob);
         outputName = `${selectedFile.name.replace(/\.pdf$/i, '')}_pole-${selectedPosition}.pdf`;
