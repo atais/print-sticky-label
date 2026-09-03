@@ -41,7 +41,7 @@ function differentPixelRatio(actual, expected) {
     return differentPixels / (actual.data.length / 4)
 }
 
-async function writeDiffImages(position, actual, expected) {
+async function writeDiffImages(name, position, actual, expected) {
     await mkdir(results, {recursive: true})
     const diff = createCanvas(actual.width, actual.height)
     const context = diff.getContext('2d')
@@ -63,9 +63,9 @@ async function writeDiffImages(position, actual, expected) {
 
     context.putImageData(image, 0, 0)
     await Promise.all([
-        writeFile(resolve(results, `a4-${position}-expected.png`), imageToPng(expected)),
-        writeFile(resolve(results, `a4-${position}-actual.png`), imageToPng(actual)),
-        writeFile(resolve(results, `a4-${position}-diff.png`), diff.toBuffer('image/png')),
+        writeFile(resolve(results, `${name}-${position}-expected.png`), imageToPng(expected)),
+        writeFile(resolve(results, `${name}-${position}-actual.png`), imageToPng(actual)),
+        writeFile(resolve(results, `${name}-${position}-diff.png`), diff.toBuffer('image/png')),
     ])
 }
 
@@ -76,21 +76,26 @@ function imageToPng(imageData) {
 }
 
 describe('PDF label positioning', () => {
-    const sourcePath = resolve(fixtures, 'a4-1.pdf')
+    const cases = [
+        {name: 'a4', source: 'a4/a4-1.pdf', expected: position => `a4/a4-${position}.pdf`},
+        {name: 'a6', source: 'a6/in.pdf', expected: position => `a6/a6-${position}.pdf`},
+    ]
 
-    for (const position of [1, 2, 3, 4]) {
-        it(`matches the validated A4 position ${position}`, async () => {
-            const [source, expected] = await Promise.all([
-                readFile(sourcePath),
-                readFile(resolve(fixtures, `a4-${position}.pdf`)),
-            ])
-            const actual = await createPositionedPdf(source, position)
-            const actualImage = await renderFirstPage(actual)
-            const expectedImage = await renderFirstPage(expected)
-            const difference = differentPixelRatio(actualImage, expectedImage)
+    for (const testCase of cases) {
+        for (const position of [1, 2, 3, 4]) {
+            it(`matches the validated ${testCase.name.toUpperCase()} position ${position}`, async () => {
+                const [source, expected] = await Promise.all([
+                    readFile(resolve(fixtures, testCase.source)),
+                    readFile(resolve(fixtures, testCase.expected(position))),
+                ])
+                const actual = await createPositionedPdf(source, position)
+                const actualImage = await renderFirstPage(actual)
+                const expectedImage = await renderFirstPage(expected)
+                const difference = differentPixelRatio(actualImage, expectedImage)
 
-            if (difference > maxDifferentPixels) await writeDiffImages(position, actualImage, expectedImage)
-            expect(difference).toBeLessThanOrEqual(maxDifferentPixels)
-        })
+                if (difference > maxDifferentPixels) await writeDiffImages(testCase.name, position, actualImage, expectedImage)
+                expect(difference).toBeLessThanOrEqual(maxDifferentPixels)
+            })
+        }
     }
 })
