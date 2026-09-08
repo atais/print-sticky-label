@@ -16,10 +16,20 @@
     <meta name="twitter:title" content="Drukuj etykiety wysyłkowe bez problemu"/>
     <meta name="twitter:description"
           content="Ustaw etykietę wysyłkową A6 w wybranej ćwiartce arkusza A4. Pobierz gotowy PDF i drukuj bez problemu."/>
-    <title>Drukuj etykiety wysyłkowe bez problemu</title>
+    <title>Print! | Drukuj etykiety wysyłkowe</title>
 </head>
 <body>
-<main class="app">
+<header class="mx-auto flex w-full max-w-7xl items-center justify-between border-b border-gray-200 px-5 py-5 lg:px-8">
+    <a href="index.html" class="text-lg font-black tracking-[-0.06em] text-gray-900">PRINT<span class="text-blue-600">!</span></a>
+    <nav class="flex items-center gap-1 text-sm font-medium" aria-label="Główna nawigacja">
+        <a class="rounded-full bg-gray-900 px-3 py-2 text-white" href="index.html" aria-current="page">Print!</a>
+        <a class="rounded-full px-3 py-2 text-gray-600 transition hover:text-gray-900" href="how-to-use.html">How to use</a>
+        <a class="rounded-full px-3 py-2 text-gray-600 transition hover:text-gray-900" href="faq.html">FAQ</a>
+    </nav>
+    <a class="hidden text-sm font-medium text-gray-600 transition hover:text-blue-600 sm:block" href="https://github.com/atais/print-sticky-label" target="_blank" rel="noreferrer">GitHub ↗</a>
+</header>
+
+<main class="app mx-auto max-w-7xl px-5 pb-20 pt-8 lg:px-8">
     <section class="card upload-card">
         <div class="step-heading"><span class="step-number">1</span>
             <div><span class="step-label">Krok pierwszy</span>
@@ -67,17 +77,10 @@
         </div>
     </section>
 </main>
-<footer class="footer">
-    <span>
-        <span>Stworzone z <span class="love" role="img" aria-label="miłość">♥</span></span>
-        <a class="github-link" href="https://github.com/atais/print-sticky-label" target="_blank" rel="noreferrer"
-           aria-label="Zobacz projekt na GitHubie"><span id="githubIcon" aria-hidden="true"></span></a>
-    </span>
-    <a class="feedback-link" href="https://github.com/atais/print-sticky-label/issues/new?template=bug_report.yml"
-       target="_blank" rel="noreferrer">Zgłoś uwagę</a>
-    <span class="footer-right">
-        <span class="footer-version">Wersja: <span id="buildVersion">local</span></span>
-    </span>
+
+<footer class="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-8 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between lg:px-8 border-t border-gray-200">
+    <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Nawigacja w stopce"><a class="transition hover:text-gray-900" href="index.html">Print!</a><a class="transition hover:text-gray-900" href="how-to-use.html">How to use</a><a class="transition hover:text-gray-900" href="faq.html">FAQ</a><a class="transition hover:text-gray-900" href="https://github.com/atais/print-sticky-label" target="_blank" rel="noreferrer">GitHub</a></nav>
+    <a class="text-blue-600 transition hover:text-blue-700" href="https://github.com/atais/print-sticky-label/issues/new?template=bug_report.yml" target="_blank" rel="noreferrer">Zgłoś uwagę ↗</a>
 </footer>
 <script type="module" src="/src/main.js"></script>
 </body>
