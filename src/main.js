@@ -5,6 +5,7 @@ const $ = (selector) => document.querySelector(selector)
 const fileInput = $('#fileInput'), dropzone = $('#dropzone'), filename = $('#filename')
 const makeBtn = $('#makeBtn'), downloadBtn = $('#downloadBtn')
 const preview = $('#preview'), previewFrame = $('#previewFrame')
+const isTouchDevice = matchMedia('(pointer: coarse)').matches
 let selectedFile, selectedPosition = 1, outputUrl, outputName
 
 function setFile(file) {
@@ -56,8 +57,12 @@ makeBtn.addEventListener('click', async () => {
         if (outputUrl) URL.revokeObjectURL(outputUrl);
         outputUrl = URL.createObjectURL(blob);
         outputName = `${selectedFile.name.replace(/\.pdf$/i, '')}_pole-${selectedPosition}.pdf`;
-        previewFrame.src = outputUrl;
-        preview.style.display = 'block';
+        if (isTouchDevice) {
+            window.open(outputUrl, '_blank')
+        } else {
+            previewFrame.src = outputUrl;
+            preview.style.display = 'block';
+        }
         downloadBtn.disabled = false
     } catch (error) {
         console.error(error)
