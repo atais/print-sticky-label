@@ -1,6 +1,5 @@
 import {createPositionedPdf} from './pdf.js'
 import './style.css'
-import './layout.js'
 
 const $ = (selector) => document.querySelector(selector)
 const fileInput = $('#fileInput'), dropzone = $('#dropzone'), filename = $('#filename')

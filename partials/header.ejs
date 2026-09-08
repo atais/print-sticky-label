@@ -1,0 +1,9 @@
+<header class="mx-auto flex w-full max-w-7xl items-center justify-between border-b border-gray-200 px-5 py-5 lg:px-8">
+    <a href="index.html" class="text-lg font-black tracking-[-0.06em] text-gray-900">PRINT<span class="text-coral">!</span></a>
+    <nav class="flex items-center gap-1 text-sm font-medium" aria-label="Główna nawigacja">
+        <% navLinks.forEach(function (link) { %>
+        <a class="<%= link.href === active ? 'rounded-full bg-charcoal px-3 py-2 text-white' : 'rounded-full px-3 py-2 text-gray-600 transition hover:text-gray-900' %>" href="<%= link.href %>"<% if (link.href === active) { %> aria-current="page"<% } %>><%= link.label %></a>
+        <% }); %>
+    </nav>
+    <a class="hidden text-sm font-medium text-gray-600 transition hover:text-coral sm:block" href="https://github.com/atais/print-sticky-label" target="_blank" rel="noreferrer">GitHub ↗</a>
+</header>

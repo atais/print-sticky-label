@@ -1,0 +1,7 @@
+<footer class="mx-auto flex w-full max-w-7xl flex-col gap-5 px-5 py-8 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between lg:px-8 border-t border-gray-200">
+    <nav class="flex flex-wrap gap-x-5 gap-y-2" aria-label="Nawigacja w stopce">
+        <% navLinks.forEach(function (link) { %><a class="transition hover:text-gray-900" href="<%= link.href %>"><%= link.label %></a><% }); %>
+        <a class="transition hover:text-gray-900" href="https://github.com/atais/print-sticky-label" target="_blank" rel="noreferrer">GitHub</a>
+    </nav>
+    <a class="text-coral transition hover:text-coral" href="https://github.com/atais/print-sticky-label/issues/new?template=bug_report.yml" target="_blank" rel="noreferrer">Zgłoś uwagę ↗</a>
+</footer>
