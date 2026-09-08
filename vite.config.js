@@ -18,7 +18,7 @@ function htmlPartials() {
             const active = basename(ctx.filename)
             return html.replace(/<!--\s*@include\s+(\w+)\s*-->/g, (_, name) => {
                 const template = readFileSync(resolve('partials', `${name}.ejs`), 'utf-8')
-                return ejs.render(template, { active, navLinks: NAV_LINKS })
+                return ejs.render(template, { active, navLinks: NAV_LINKS, year: new Date().getFullYear() })
             })
         },
     }
