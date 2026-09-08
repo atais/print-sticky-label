@@ -1,10 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-    --color-grassy: #9bc400;
-    --color-mountain: #8076a3;
-    --color-misty: #f9c5bd;
-    --color-stone: #7c677f;
+    --color-peach: #ffcba4;
+    --color-coral: #ff6b6b;
+    --color-charcoal: #333333;
 }
 
 :root {
@@ -136,7 +135,7 @@ body {
     width: 36px;
     height: 36px;
     border-radius: 50%;
-    background: var(--color-stone);
+    background: var(--color-charcoal);
     color: #fff;
     font-size: 16px;
     font-weight: 800;
@@ -178,7 +177,7 @@ body {
 }
 
 .dropzone:hover, .dropzone.drag {
-    border-color: var(--color-grassy);
+    border-color: var(--color-coral);
     background: #f3f4f6;
 }
 
@@ -273,14 +272,14 @@ body {
 }
 
 .quad.selected {
-    outline: 3px solid var(--color-mountain);
+    outline: 3px solid var(--color-peach);
     outline-offset: -3px;
-    color: var(--color-mountain);
+    color: var(--color-peach);
     background: #f3f4f6;
 }
 
 .paper:focus-visible {
-    outline: 3px solid var(--color-grassy);
+    outline: 3px solid var(--color-coral);
     outline-offset: 4px;
 }
 
@@ -304,8 +303,8 @@ body {
 }
 
 .primary {
-    background: var(--color-grassy);
-    color: #16210a;
+    background: var(--color-coral);
+    color: var(--color-charcoal);
 }
 
 .secondary {
