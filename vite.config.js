@@ -11,6 +11,8 @@ const NAV_LINKS = [
     { href: 'faq.html', label: 'FAQ' },
 ]
 
+const VERSION = (process.env.VITE_BUILD_VERSION || 'dev').replace(/^([0-9a-f]{7})[0-9a-f]{33}$/, '$1')
+
 function htmlPartials() {
     return {
         name: 'html-partials',
@@ -18,7 +20,7 @@ function htmlPartials() {
             const active = basename(ctx.filename)
             return html.replace(/<!--\s*@include\s+(\w+)\s*-->/g, (_, name) => {
                 const template = readFileSync(resolve('partials', `${name}.ejs`), 'utf-8')
-                return ejs.render(template, { active, navLinks: NAV_LINKS, year: new Date().getFullYear() })
+                return ejs.render(template, { active, navLinks: NAV_LINKS, year: new Date().getFullYear(), version: `v.${VERSION.replace(/^v/, '')}` })
             })
         },
     }
