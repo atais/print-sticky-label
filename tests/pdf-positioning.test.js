@@ -6,7 +6,7 @@ import {createPositionedPdf} from '../src/pdf.js'
 
 Object.assign(globalThis, {DOMMatrix, ImageData, Path2D})
 
-const fixtures = resolve('tests/fixtures/pdf-positioning/expected')
+const fixtures = resolve('tests/fixtures/pdf-positioning')
 const results = resolve('test-results/pdf-positioning')
 const renderScale = 1.5
 const channelTolerance = 16
@@ -76,24 +76,21 @@ function imageToPng(imageData) {
 }
 
 describe('PDF label positioning', () => {
-    const cases = [
-        {name: 'a4', source: 'a4/a4-1.pdf', expected: position => `a4/a4-${position}.pdf`},
-        {name: 'a6', source: 'a6/in.pdf', expected: position => `a6/a6-${position}.pdf`},
-    ]
+    const cases = ['a4', 'a6', 'horizontal']
 
-    for (const testCase of cases) {
+    for (const name of cases) {
         for (const position of [1, 2, 3, 4]) {
-            it(`matches the validated ${testCase.name.toUpperCase()} position ${position}`, async () => {
+            it(`matches the validated ${name} position ${position}`, async () => {
                 const [source, expected] = await Promise.all([
-                    readFile(resolve(fixtures, testCase.source)),
-                    readFile(resolve(fixtures, testCase.expected(position))),
+                    readFile(resolve(fixtures, name, 'in.pdf')),
+                    readFile(resolve(fixtures, name, `out-${position}.pdf`)),
                 ])
                 const actual = await createPositionedPdf(source, position)
                 const actualImage = await renderFirstPage(actual)
                 const expectedImage = await renderFirstPage(expected)
                 const difference = differentPixelRatio(actualImage, expectedImage)
 
-                if (difference > maxDifferentPixels) await writeDiffImages(testCase.name, position, actualImage, expectedImage)
+                if (difference > maxDifferentPixels) await writeDiffImages(name, position, actualImage, expectedImage)
                 expect(difference).toBeLessThanOrEqual(maxDifferentPixels)
             })
         }
