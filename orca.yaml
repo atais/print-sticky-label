@@ -1,0 +1,6 @@
+# Orca hooks: setup runs in every new worktree (~/.agent-kit/docs/ORCA.md). First line bootstraps the agent kit on a new machine.
+scripts:
+  setup: |
+    [ -e "$HOME/.agent-kit" ] || { gh repo clone atais/agent-kit "$HOME/Documents/agent-kit" -- --recurse-submodules --shallow-submodules && "$HOME/Documents/agent-kit/install.sh"; }
+    npm ci
+setupAgentStartupPolicy: wait-for-setup
