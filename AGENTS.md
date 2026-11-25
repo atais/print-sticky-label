@@ -20,4 +20,7 @@ Real shipping labels must be anonymized before they are committed (names, addres
 - Commit messages are in Polish, conventional style (`feat:`, `fix:`, `docs:`).
 - GitHub Pages deploys through `.github/workflows/deploy-pages.yml`, triggered by publishing a release or by `workflow_dispatch`.
 - Releases are semver tags (`gh release create vX.Y.Z --target main`); new feature = minor bump, fix = patch. Publishing the release triggers the deploy, so no separate manual deploy is needed afterwards.
-- Only commit, push, or release when the user asks.
+
+## Tasks
+
+- Tickets are GitHub issues (`gh issue view <n>`). For multi-agent work the task folder is `tasks/issue-<n>/` (gitignored); global rules and roles come from `~/.agent-kit`.
