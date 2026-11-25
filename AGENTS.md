@@ -15,17 +15,6 @@ Real shipping labels must be anonymized before they are committed (names, addres
 3. Zip back (`mimetype` first, stored), then `soffice --headless --convert-to pdf`.
 4. Render and look at the result before committing.
 
-## Styling and design ideas
-
-When the user asks for styling, layout or other design ideas, get references from the Inspo MCP (https://inspomcp.dev/, curated archive of real production sites) before proposing or writing UI:
-
-- Start with `recommend(brief)` using the user's wording (e.g. "calm utility tool, one-page"). It returns a macrostructure, exemplar sites, reference components and a palette.
-- Call `get_filters()` before passing `filters`; never guess filter values. Use `search_screens`, `find_by_color(hex)` or `find_similar(slug)` to narrow down, and `get_screen` / `get_design_system` to study a chosen site.
-- Offer 2-3 directions with the reference site slugs, and let the user pick before implementing.
-- References are inspiration, not code to copy: adapt to the existing Tailwind setup and tokens, keep Polish copy, and do not copy a site's text, logos or assets.
-- The hosted endpoint is rate-limited per IP: batch queries, cap output with `maxTokens`.
-- If the MCP is not installed in the session, tell the user to run `npx -y inspo-mcp install` (`--dry-run` previews it). Do not install it yourself, it edits the client config.
-
 ## Release and deploy
 
 - Commit messages are in Polish, conventional style (`feat:`, `fix:`, `docs:`).
